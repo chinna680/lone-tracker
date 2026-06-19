@@ -8,7 +8,9 @@ require('dotenv').config();
 const sendWhatsApp = notify.sendWhatsApp;
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'x'
+}));
 app.use(express.json());
 
 app.get('/borrowers', function (req, res) {
