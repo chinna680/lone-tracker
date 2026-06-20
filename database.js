@@ -1,17 +1,20 @@
-const Database = require('better-sqlite3');
-const db = new Database('loans.db');
 
-db.exec(`
-  CREATE TABLE IF NOT EXISTS borrowers (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    phone TEXT NOT NULL,
-    whatsapp TEXT NOT NULL,
-    loan_amount REAL NOT NULL,
-    amount_paid REAL DEFAULT 0,
-    due_date TEXT NOT NULL,
-    status TEXT DEFAULT 'pending'
-  );
-`);
+const mongoose = require('mongoose');
 
-module.exports = db;
+const borrowerSchema = new mongoose.Schema({
+  name: String,
+  phone: String,
+  whatsapp: String,
+  loan_amount: Number,
+  amount_paid: { type: Number, default: 0 },
+  due_date: String,
+  status: { type: String, default: 'pending' }
+});
+
+const Borrower = mongoose.model('Borrower', borrowerSchema);
+
+function connectDB() {
+  return mongoose.connect(process.env.MONGODB_URI);
+}
+
+module.exports = { Borrower, connectDB };
