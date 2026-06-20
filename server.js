@@ -131,6 +131,7 @@ cron.schedule('0 9 * * *', function () {
   console.log('Sent reminders to ' + overdue.length + ' people');
 });
 
+const PORT = process.env.PORT || 8080;
 app.listen(process.env.PORT, function () {
   console.log('Server running on http://localhost:' + process.env.PORT);
 });
