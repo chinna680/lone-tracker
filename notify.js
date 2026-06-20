@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-function sendWhatsapp(to, message) {
+function sendWhatsApp(to, message) {
   const twilio = require('twilio');
   const client = new twilio(
   process.env.TWILIO_ACCOUNT_SID,
