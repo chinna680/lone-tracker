@@ -1,12 +1,11 @@
-const twilio = require('twilio');
 require('dotenv').config();
 
-const client = twilio(
+async function sendWhatsapp(to, message) {
+  const twilio = require('twilio');
+  const clint = twilio(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
-
-async function sendWhatsApp(to, message) {
   await client.messages.create({
     body: message,
     from: process.env.TWILIO_WHATSAPP,
